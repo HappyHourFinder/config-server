@@ -1,12 +1,22 @@
 server.port: 8888
 
-spring.cloud.config.server.git.uri: https://github.com/HappyHourFinder/config
+app.admin-server: admin-server
 
+spring:
+  application.name: config-server
+  boot.admin.client:
+    url: http://${app.admin-server}:8080
+    username: admin
+    password: admin
+  cloud.config.server.git.uri: https://github.com/HappyHourFinder/config
 management:
   endpoint.health.show-details: "ALWAYS"
   endpoints.web.exposure.include: "*"
 
 logging.level.root: info
+
 ---
 spring.profiles: dev
 spring.cloud.config.server.native.searchLocations: file:/config
+
+app.admin-server: admin-server
